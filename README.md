@@ -16,6 +16,7 @@ Ce mini jeu est développé avec React en suivant la méthode TDD (Test-Driven D
 
 ## Librairies utilisées
 
+- [Vite](https://vitejs.dev/)
 - [React Testing Library](https://testing-library.com/)
 - [Jest](https://jestjs.io/)
 - [Supertest](https://github.com/visionmedia/supertest)

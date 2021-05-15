@@ -1,6 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+/**
+ * Functionnal React component for guessed words
+ *
+ * @param {{guessedWords: Array}} props React props
+ * @returns {JSX.Element} Rendered component
+ */
 const GuessedWords = ({ guessedWords }) => {
   let contents;
   if (guessedWords.length === 0) {

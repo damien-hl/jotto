@@ -10,7 +10,7 @@ describe("getSecretWord", () => {
     moxios.uninstall();
   });
 
-  test("Secret word is returned", async () => {
+  test("Secret word is returned", () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -20,7 +20,8 @@ describe("getSecretWord", () => {
     });
 
     // Update to test app in Redux / Context section
-    const secretWord = await getSecretWord();
-    expect(secretWord).toBe("party");
+    return getSecretWord().then((secretWord) => {
+      expect(secretWord).toBe("party");
+    });
   });
 });

@@ -8,11 +8,10 @@ import App from "./App";
  * then submit a guessed word of 'train'
  *
  * @function setup
- * @param {object} state Initial conditions
  * @returns {ReactWrapper}
  */
-const setup = (state = {}) => {
-  // TODO: Apply state
+const setup = () => {
+  // TODO: Apply state state = {}
   const wrapper = mount(<App />);
 
   // Add value to input box

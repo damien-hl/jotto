@@ -1,6 +1,7 @@
 import React from "react";
 import Congrats from "./Congrats";
 import GuessedWords from "./GuessedWords";
+import Input from "./Input";
 import "./App.css";
 
 /**
@@ -10,13 +11,17 @@ import "./App.css";
  * @returns {JSX.Element} Rendered App component
  */
 function App() {
+  // TODO: Get props from shared state
+  const success = false;
+  const secretWord = "party";
+  const guessedWords = [];
+
   return (
     <div data-test="component-app" className="container">
       <h1>Jotto</h1>
-      <Congrats success={true} />
-      <GuessedWords
-        guessedWords={[{ guessedWord: "train", letterMatchCount: 3 }]}
-      />
+      <Congrats success={success} />
+      <Input success={success} secretWord={secretWord} />
+      <GuessedWords guessedWords={guessedWords} />
     </div>
   );
 }

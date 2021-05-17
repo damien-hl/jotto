@@ -1,6 +1,7 @@
 import React from "react";
-import { shallow, ShallowWrapper } from "enzyme";
-import { checkProps, findByTestAttr } from "../test/testUtils";
+import { mount, ReactWrapper } from "enzyme";
+import { Provider } from "react-redux";
+import { checkProps, findByTestAttr, storeFactory } from "../test/testUtils";
 import Input from "./Input";
 
 // const mockSetCurrentGuess = jest.fn();
@@ -14,12 +15,18 @@ import Input from "./Input";
  * Factory function to create a ShallowWrapper for the Congrats component
  *
  * @function setup
- * @param {boolean} success Component props specific to this setup
+ * @param {object} initialState Initial state to store
  * @param {string} secretWord Component props specific to this setup
- * @returns {ShallowWrapper}
+ * @returns {ReactWrapper}
  */
-const setup = (success = false, secretWord = "party") => {
-  return shallow(<Input success={success} secretWord={secretWord} />);
+const setup = (initialState = {}, secretWord = "party") => {
+  const store = storeFactory(initialState);
+
+  return mount(
+    <Provider store={store}>
+      <Input secretWord={secretWord} />
+    </Provider>
+  );
 };
 
 describe("Render", () => {
@@ -27,7 +34,7 @@ describe("Render", () => {
     let wrapper;
 
     beforeEach(() => {
-      wrapper = setup(true);
+      wrapper = setup({ success: true });
     });
 
     test("Renders without error", () => {
@@ -50,7 +57,7 @@ describe("Render", () => {
     let wrapper;
 
     beforeEach(() => {
-      wrapper = setup(false);
+      wrapper = setup({ success: false });
     });
 
     test("Renders without error", () => {
@@ -84,7 +91,7 @@ describe("State controlled input field", () => {
     originalUseState = React.useState;
     React.useState = () => ["", mockSetCurrentGuess];
 
-    wrapper = setup();
+    wrapper = setup({ success: false });
   });
 
   afterEach(() => {

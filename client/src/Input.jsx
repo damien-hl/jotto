@@ -1,15 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
 /**
  * Functionnal React component for input field
  *
  * @function Input
- * @param {{success: boolean}} props React props
  * @returns {JSX.Element} Rendered component
  */
-const Input = ({ success }) => {
+const Input = () => {
   const [currentGuess, setCurrentGuess] = React.useState("");
+  const success = useSelector((state) => state.success);
 
   const handleClick = (event) => {
     event.preventDefault();

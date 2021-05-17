@@ -1,6 +1,7 @@
 import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import { findByTestAttr } from "../test/testUtils";
+import { Provider } from "react-redux";
+import { findByTestAttr, storeFactory } from "../test/testUtils";
 import App from "./App";
 
 // Activate global mock to make sure getSecretWord doesn't make network call
@@ -14,7 +15,13 @@ import { getSecretWord as mockGetSecretWord } from "./actions";
  * @returns {ReactWrapper}
  */
 const setup = () => {
-  return mount(<App />);
+  const store = storeFactory();
+
+  return mount(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
 };
 
 test("renders without error", () => {

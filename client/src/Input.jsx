@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { guessWord } from "./actions";
 
 /**
  * Functionnal React component for input field
@@ -10,12 +11,12 @@ import { useSelector } from "react-redux";
  */
 const Input = () => {
   const [currentGuess, setCurrentGuess] = React.useState("");
+  const dispatch = useDispatch();
   const success = useSelector((state) => state.success);
 
   const handleClick = (event) => {
     event.preventDefault();
-    // TODO: Update guessedWords
-    // TODO: Check against secretWord and update success if needed
+    dispatch(guessWord(currentGuess));
     setCurrentGuess("");
   };
 

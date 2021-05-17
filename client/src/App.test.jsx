@@ -42,7 +42,6 @@ describe("Get secret word", () => {
   });
 
   test("getSecretWord does not run on app update", () => {
-    // eslint-disable-next-line no-unused-vars
     const wrapper = setup();
     mockGetSecretWord.mockClear();
     // Using setProps to trigger useEffect

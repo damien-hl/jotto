@@ -6,7 +6,6 @@ import { actionTypes } from "../actions";
  * @param {object} action Action to be reduced
  * @returns {Array}
  */
-// eslint-disable-next-line no-unused-vars
 export default (state = [], action) => {
   switch (action.type) {
     case actionTypes.GUESS_WORD:

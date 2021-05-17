@@ -22,9 +22,7 @@ export const actionTypes = {
  * @param {string} guessedWord Guessed word
  * @returns {Function} Redux Thunk function
  */
-// eslint-disable-next-line no-unused-vars
 export const guessWord = (guessedWord) => {
-  // eslint-disable-next-line no-unused-vars
   return function (dispatch, getState) {
     const secretWord = getState().secretWord;
     const letterMatchCount = getLetterMatchCount(guessedWord, secretWord);

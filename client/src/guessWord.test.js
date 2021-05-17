@@ -1,18 +1,27 @@
 import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import { findByTestAttr } from "../test/testUtils";
+import { Provider } from "react-redux";
+import { findByTestAttr, storeFactory } from "../test/testUtils";
 import App from "./App";
+
+// Activate global mock to make sure getSecretWord doesn't make network call
+jest.mock("./actions");
 
 /**
  * Factory function to create a ShallowWrapper with specified initial conditions,
  * then submit a guessed word of 'train'
  *
  * @function setup
+ * @param {object} initialState Initial conditions
  * @returns {ReactWrapper}
  */
-const setup = () => {
-  // TODO: Apply state state = {}
-  const wrapper = mount(<App />);
+const setup = (initialState = {}) => {
+  const store = storeFactory(initialState);
+  const wrapper = mount(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
 
   // Add value to input box
   const inputBox = findByTestAttr(wrapper, "input-box");
@@ -25,7 +34,7 @@ const setup = () => {
   return wrapper;
 };
 
-describe.skip("No words guessed", () => {
+describe("No words guessed", () => {
   let wrapper;
 
   beforeEach(() => {
@@ -42,12 +51,12 @@ describe.skip("No words guessed", () => {
   });
 });
 
-describe.skip("Some words guessed", () => {
+describe("Some words guessed", () => {
   let wrapper;
 
   beforeEach(() => {
     wrapper = setup({
-      guessedWords: [{ guessedWord: "agile", letterCountMatch: 1 }],
+      guessedWords: [{ guessedWord: "agile", letterMatchCount: 1 }],
       secretWord: "party",
       success: false,
     });
@@ -59,12 +68,12 @@ describe.skip("Some words guessed", () => {
   });
 });
 
-describe.skip("Guess the secret word", () => {
+describe("Guess the secret word", () => {
   let wrapper;
 
   beforeEach(() => {
     wrapper = setup({
-      guessedWords: [{ guessedWord: "agile", letterCountMatch: 1 }],
+      guessedWords: [{ guessedWord: "agile", letterMatchCount: 1 }],
       secretWord: "party",
       success: false,
     });

@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
-import { findByTestAttr } from "../test/testUtils";
+import { checkProps, findByTestAttr } from "../test/testUtils";
 import TotalGuesses from "./TotalGuesses";
 
 const defaultProps = { guessCount: 0 };
@@ -29,4 +29,9 @@ test("Renders the number of guesses", () => {
   const wrapper = setup({ guessCount });
   const component = findByTestAttr(wrapper, "component-total-guesses");
   expect(component.text()).toContain(guessCount.toString());
+});
+
+test("Does not throw a warning with expected props", () => {
+  const expectedProps = { guessCount: 0 };
+  checkProps(TotalGuesses, expectedProps);
 });

@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getSecretWord } from "./actions";
 import Congrats from "./Congrats";
 import GuessedWords from "./GuessedWords";
 import Input from "./Input";
-import { getSecretWord } from "./actions";
+// import TotalGuesses from "./TotalGuesses";
 import "./App.css";
 
 /**

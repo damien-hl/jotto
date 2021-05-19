@@ -17,10 +17,37 @@ const setup = () => {
   return mount(<App />);
 };
 
-test("renders without error", () => {
-  const wrapper = setup();
-  const app = findByTestAttr(wrapper, "component-app");
-  expect(app.length).toBe(1);
+describe.each([
+  [null, true, false],
+  ["party", false, true],
+])("renders with secretWord as %s", (secretWord, loadingShows, appShows) => {
+  let wrapper;
+  let originalUseReducer;
+
+  beforeEach(() => {
+    originalUseReducer = React.useReducer;
+
+    const mockUseReducer = jest
+      .fn()
+      .mockReturnValue([{ secretWord }, jest.fn()]);
+
+    React.useReducer = mockUseReducer;
+    wrapper = setup();
+  });
+
+  afterEach(() => {
+    React.useReducer = originalUseReducer;
+  });
+
+  test(`Renders loading spinner: ${loadingShows}`, () => {
+    const spinnerComponent = findByTestAttr(wrapper, "spinner");
+    expect(spinnerComponent.exists()).toBe(loadingShows);
+  });
+
+  test(`Renders App: ${appShows}`, () => {
+    const appComponent = findByTestAttr(wrapper, "component-app");
+    expect(appComponent.exists()).toBe(appShows);
+  });
 });
 
 describe("Get secret word", () => {

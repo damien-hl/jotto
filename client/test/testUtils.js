@@ -1,5 +1,5 @@
-import checkPropTypes from "check-prop-types";
 import { ReactWrapper, ShallowWrapper } from "enzyme";
+import { checkPropTypes } from "prop-types";
 
 /**
  * Utility function to find and return node(s) with the given data-test attribute

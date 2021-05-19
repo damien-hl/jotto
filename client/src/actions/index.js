@@ -1,6 +1,12 @@
 import axios from "axios";
 
-export const getSecretWord = () => {
+/**
+ * Action creator
+ *
+ * @param {Function} setSecretWord Setter for the secret word
+ */
+export const getSecretWord = async (setSecretWord) => {
   // TODO: Write actual action in Redux / Context section
-  return axios.get("http://localhost:3030").then((response) => response.data);
+  const response = await axios.get("http://localhost:3030");
+  setSecretWord(response.data);
 };

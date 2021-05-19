@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Congrats from "./Congrats";
 import GuessedWords from "./GuessedWords";
 import Input from "./Input";
@@ -12,13 +12,13 @@ import "./App.css";
  * @returns {JSX.Element} Rendered App component
  */
 function App() {
+  const [secretWord, setSecretWord] = useState("");
   // TODO: Get props from shared state
   const success = false;
-  const secretWord = "party";
   const guessedWords = [];
 
   useEffect(() => {
-    getSecretWord();
+    getSecretWord(setSecretWord);
   }, []);
 
   return (

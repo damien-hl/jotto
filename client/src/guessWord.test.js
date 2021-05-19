@@ -25,6 +25,7 @@ const setup = () => {
   return wrapper;
 };
 
+// eslint-disable-next-line jest/no-disabled-tests
 describe.skip("No words guessed", () => {
   let wrapper;
 
@@ -42,6 +43,7 @@ describe.skip("No words guessed", () => {
   });
 });
 
+// eslint-disable-next-line jest/no-disabled-tests
 describe.skip("Some words guessed", () => {
   let wrapper;
 
@@ -59,6 +61,7 @@ describe.skip("Some words guessed", () => {
   });
 });
 
+// eslint-disable-next-line jest/no-disabled-tests
 describe.skip("Guess the secret word", () => {
   let wrapper;
 

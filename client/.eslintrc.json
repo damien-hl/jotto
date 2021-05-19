@@ -9,10 +9,14 @@
   "extends": [
     "eslint:recommended",
     "plugin:jsdoc/recommended",
-    "plugin:prettier/recommended",
-    "plugin:react/recommended"
+    "plugin:jest/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
   ],
-  "plugins": ["jsdoc"],
+  "plugins": [
+    "jsdoc",
+    "jest"
+  ],
   "globals": {
     "JSX": true
   },
@@ -24,7 +28,9 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "ignorePatterns": ["node_modules/"],
+  "ignorePatterns": [
+    "node_modules/"
+  ],
   "settings": {
     "react": {
       "version": "latest"

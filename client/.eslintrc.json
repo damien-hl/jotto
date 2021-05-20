@@ -13,10 +13,7 @@
     "plugin:react/recommended",
     "plugin:prettier/recommended"
   ],
-  "plugins": [
-    "jsdoc",
-    "jest"
-  ],
+  "plugins": ["jsdoc", "jest"],
   "globals": {
     "JSX": true
   },
@@ -28,9 +25,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "ignorePatterns": [
-    "node_modules/"
-  ],
+  "ignorePatterns": ["node_modules/"],
   "settings": {
     "react": {
       "version": "latest"

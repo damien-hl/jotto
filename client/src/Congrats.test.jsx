@@ -36,6 +36,7 @@ test("Renders non-empty congrats message when `success` is true", () => {
   expect(message.text().length).not.toBe(0);
 });
 
+// eslint-disable-next-line jest/expect-expect
 test("Does not throw a warning with expected props", () => {
   const expectedProps = { success: false };
   checkProps(Congrats, expectedProps);

@@ -20,6 +20,7 @@ const setup = (props = {}) => {
   return shallow(<GuessedWords {...setupProps} />);
 };
 
+// eslint-disable-next-line jest/expect-expect
 test("Does not throw a warning with expected props", () => {
   checkProps(GuessedWords, defaultProps);
 });

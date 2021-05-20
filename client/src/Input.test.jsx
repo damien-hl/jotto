@@ -70,6 +70,7 @@ describe("Render", () => {
   });
 });
 
+// eslint-disable-next-line jest/expect-expect
 test("Does not throw a warning with expected props", () => {
   checkProps(Input, { secretWord: "party" });
 });

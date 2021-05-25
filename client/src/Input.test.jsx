@@ -1,6 +1,7 @@
 import React from "react";
-import { shallow, ShallowWrapper } from "enzyme";
+import { mount, ReactWrapper } from "enzyme";
 import { checkProps, findByTestAttr } from "../test/testUtils";
+import languageContext from "./contexts/languageContext";
 import Input from "./Input";
 
 // const mockSetCurrentGuess = jest.fn();
@@ -14,12 +15,19 @@ import Input from "./Input";
  * Factory function to create a ShallowWrapper for the Congrats component
  *
  * @function setup
- * @param {boolean} success Component props specific to this setup
- * @param {string} secretWord Component props specific to this setup
- * @returns {ShallowWrapper}
+ * @param {{language: string, success: boolean, secretWord: string}} success Component props specific to this setup
+ * @returns {ReactWrapper}
  */
-const setup = (success = false, secretWord = "party") => {
-  return shallow(<Input success={success} secretWord={secretWord} />);
+const setup = ({ language, success, secretWord }) => {
+  language = language || "en";
+  secretWord = secretWord || "party";
+  success = success || false;
+
+  return mount(
+    <languageContext.Provider value={language}>
+      <Input success={success} secretWord={secretWord} />
+    </languageContext.Provider>
+  );
 };
 
 describe("Render", () => {
@@ -27,7 +35,7 @@ describe("Render", () => {
     let wrapper;
 
     beforeEach(() => {
-      wrapper = setup(true);
+      wrapper = setup({ success: true });
     });
 
     test("Renders without error", () => {
@@ -50,7 +58,7 @@ describe("Render", () => {
     let wrapper;
 
     beforeEach(() => {
-      wrapper = setup(false);
+      wrapper = setup({ success: false });
     });
 
     test("Renders without error", () => {
@@ -85,7 +93,7 @@ describe("State controlled input field", () => {
     originalUseState = React.useState;
     React.useState = () => ["", mockSetCurrentGuess];
 
-    wrapper = setup();
+    wrapper = setup({});
   });
 
   afterEach(() => {
@@ -107,5 +115,19 @@ describe("State controlled input field", () => {
     submitButton.simulate("click", { preventDefault() {} });
 
     expect(mockSetCurrentGuess).toHaveBeenCalledWith("");
+  });
+});
+
+describe("languqegPicker", () => {
+  test("Correctly renders submit string english", () => {
+    const wrapper = setup({ language: "en" });
+    const submitButton = findByTestAttr(wrapper, "submit-button");
+    expect(submitButton.text()).toBe("Submit");
+  });
+
+  test("Correctly renders submit string emoji", () => {
+    const wrapper = setup({ language: "emoji" });
+    const submitButton = findByTestAttr(wrapper, "submit-button");
+    expect(submitButton.text()).toBe("🚀");
   });
 });

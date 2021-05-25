@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
+
+import languageContext from "./contexts/languageContext";
+import stringsModule from "./helpers/strings";
 
 /**
  * Functionnal React component for input field
@@ -10,6 +13,7 @@ import PropTypes from "prop-types";
  */
 const Input = ({ success }) => {
   const [currentGuess, setCurrentGuess] = React.useState("");
+  const language = useContext(languageContext);
 
   const handleClick = (event) => {
     event.preventDefault();
@@ -28,7 +32,10 @@ const Input = ({ success }) => {
         <input
           data-test="input-box"
           type="text"
-          placeholder="enter guess"
+          placeholder={stringsModule.getStringByLanguage(
+            language,
+            "guessInputPlaceholder"
+          )}
           value={currentGuess}
           onChange={(event) => setCurrentGuess(event.target.value)}
           className="mb-2 mx-sm-3"
@@ -39,7 +46,7 @@ const Input = ({ success }) => {
           onClick={handleClick}
           className="btn btn-primary mb-2"
         >
-          Submit
+          {stringsModule.getStringByLanguage(language, "submit")}
         </button>
       </form>
     </div>

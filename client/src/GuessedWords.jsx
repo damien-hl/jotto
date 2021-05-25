@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import languageContext from "./contexts/languageContext";
+import stringsModule from "./helpers/strings";
+
 /**
  * Functionnal React component for guessed words
  *
@@ -8,10 +11,15 @@ import PropTypes from "prop-types";
  * @returns {JSX.Element} Rendered component
  */
 const GuessedWords = ({ guessedWords }) => {
+  const language = React.useContext(languageContext);
+
   let contents;
+
   if (guessedWords.length === 0) {
     contents = (
-      <span data-test="guess-instructions">Try to guess the secret word!</span>
+      <span data-test="guess-instructions">
+        {stringsModule.getStringByLanguage(language, "guessPrompt")}
+      </span>
     );
   } else {
     const guessedWordsRows = guessedWords.map((word, index) => (
@@ -23,12 +31,21 @@ const GuessedWords = ({ guessedWords }) => {
 
     contents = (
       <div data-test="guessed-words">
-        <h3>Gessed Words</h3>
+        <h3>
+          {stringsModule.getStringByLanguage(language, "guessColumnHeader")}
+        </h3>
         <table className="table table-sm">
           <thead className="thead-light">
             <tr>
-              <th>Guess</th>
-              <th>Matching Letters</th>
+              <th>
+                {stringsModule.getStringByLanguage(language, "guessedWords")}
+              </th>
+              <th>
+                {stringsModule.getStringByLanguage(
+                  language,
+                  "matchingLettersColumnHeader"
+                )}
+              </th>
             </tr>
           </thead>
           <tbody>{guessedWordsRows}</tbody>

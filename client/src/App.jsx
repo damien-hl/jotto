@@ -20,7 +20,7 @@ import "./App.css";
  * @returns {object} New state
  */
 const reducer = (state, action) => {
-  switch (action.state) {
+  switch (action.type) {
     case "setSecretWord":
       return { ...state, secretWord: action.payload };
     case "setLanguage":

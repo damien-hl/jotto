@@ -6,7 +6,7 @@ const successContext = React.createContext();
  * @function useSuccess
  * @returns {Array} successContext value, which is a state of [value, setter]
  */
-function useSucess() {
+function useSuccess() {
   const context = React.useContext(successContext);
 
   if (!context) {
@@ -31,5 +31,5 @@ function SuccessProvider(props) {
 
 export default {
   SuccessProvider,
-  useSucess,
+  useSuccess,
 };

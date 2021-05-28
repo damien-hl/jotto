@@ -1,7 +1,8 @@
 import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import { checkProps, findByTestAttr } from "../test/testUtils";
+import { findByTestAttr } from "../test/testUtils";
 import languageContext from "./contexts/languageContext";
+import successContext from "./contexts/successContext";
 import Congrats from "./Congrats";
 
 /**
@@ -17,7 +18,9 @@ const setup = ({ success, language }) => {
 
   return mount(
     <languageContext.Provider value={language}>
-      <Congrats success={success} />
+      <successContext.SuccessProvider value={[success, jest.fn()]}>
+        <Congrats />
+      </successContext.SuccessProvider>
     </languageContext.Provider>
   );
 };
@@ -35,12 +38,12 @@ describe("languagePicker", () => {
 });
 
 test("Renders without error", () => {
-  const wrapper = setup({});
+  const wrapper = setup({ success: true });
   const component = findByTestAttr(wrapper, "component-congrats");
   expect(component.length).toBe(1);
 });
 
-test("Renders no text when `success` prop is false", () => {
+test("Renders no text when `success` is false", () => {
   const wrapper = setup({ success: false });
   const component = findByTestAttr(wrapper, "component-congrats");
   expect(component.text()).toBe("");
@@ -50,10 +53,4 @@ test("Renders non-empty congrats message when `success` is true", () => {
   const wrapper = setup({ success: true });
   const message = findByTestAttr(wrapper, "congrats-message");
   expect(message.text().length).not.toBe(0);
-});
-
-// eslint-disable-next-line jest/expect-expect
-test("Does not throw a warning with expected props", () => {
-  const expectedProps = { success: false };
-  checkProps(Congrats, expectedProps);
 });

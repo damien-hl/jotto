@@ -1,16 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 
+import guessedWordsContext from "./contexts/guessedWordsContext";
 import languageContext from "./contexts/languageContext";
 import stringsModule from "./helpers/strings";
 
 /**
  * Functionnal React component for guessed words
  *
- * @param {{guessedWords: Array}} props React props
  * @returns {JSX.Element} Rendered component
  */
-const GuessedWords = ({ guessedWords }) => {
+const GuessedWords = () => {
+  const [guessedWords] = guessedWordsContext.useGuessedWords();
   const language = React.useContext(languageContext);
 
   let contents;
@@ -55,15 +55,6 @@ const GuessedWords = ({ guessedWords }) => {
   }
 
   return <div data-test="component-guessed-words">{contents}</div>;
-};
-
-GuessedWords.propTypes = {
-  guessedWords: PropTypes.arrayOf(
-    PropTypes.shape({
-      guessedWord: PropTypes.string.isRequired,
-      letterMatchCount: PropTypes.number.isRequired,
-    })
-  ).isRequired,
 };
 
 export default GuessedWords;

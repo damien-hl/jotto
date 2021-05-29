@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import guessedWordsContext from "./contexts/guessedWordsContext";
 import languageContext from "./contexts/languageContext";
 import successContext from "./contexts/successContext";
 import { getSecretWord } from "./actions";
@@ -44,8 +45,6 @@ function App() {
     language: "en",
   });
 
-  const guessedWords = [];
-
   const setSecretWord = (secretWord) => {
     dispatch({ type: "setSecretWord", payload: secretWord });
   };
@@ -74,11 +73,13 @@ function App() {
       <h1>Jotto</h1>
       <languageContext.Provider value={state.language}>
         <LanguagePicker setLanguage={setLanguage} />
-        <successContext.SuccessProvider>
-          <Congrats />
-          <Input secretWord={state.secretWord} />
-        </successContext.SuccessProvider>
-        <GuessedWords guessedWords={guessedWords} />
+        <guessedWordsContext.GuessedWordsProvider>
+          <successContext.SuccessProvider>
+            <Congrats />
+            <Input secretWord={state.secretWord} />
+          </successContext.SuccessProvider>
+          <GuessedWords />
+        </guessedWordsContext.GuessedWordsProvider>
       </languageContext.Provider>
     </div>
   );

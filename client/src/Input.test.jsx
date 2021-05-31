@@ -1,6 +1,7 @@
 import React from "react";
 import { mount, ReactWrapper } from "enzyme";
 import { checkProps, findByTestAttr } from "../test/testUtils";
+import guessedWordsContext from "./contexts/guessedWordsContext";
 import languageContext from "./contexts/languageContext";
 import successContext from "./contexts/successContext";
 import Input from "./Input";
@@ -27,7 +28,9 @@ const setup = ({ language, success, secretWord }) => {
   return mount(
     <languageContext.Provider value={language}>
       <successContext.SuccessProvider value={[success, jest.fn()]}>
-        <Input success={success} secretWord={secretWord} />
+        <guessedWordsContext.GuessedWordsProvider>
+          <Input success={success} secretWord={secretWord} />
+        </guessedWordsContext.GuessedWordsProvider>
       </successContext.SuccessProvider>
     </languageContext.Provider>
   );

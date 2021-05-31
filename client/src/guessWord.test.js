@@ -44,8 +44,7 @@ const setup = ({ secretWord, guessedWords }) => {
   return wrapper;
 };
 
-// eslint-disable-next-line jest/no-disabled-tests
-describe.skip("No words guessed", () => {
+describe("No words guessed", () => {
   let wrapper;
 
   beforeEach(() => {
@@ -62,8 +61,7 @@ describe.skip("No words guessed", () => {
   });
 });
 
-// eslint-disable-next-line jest/no-disabled-tests
-describe.skip("Some words guessed", () => {
+describe("Some words guessed", () => {
   let wrapper;
 
   beforeEach(() => {
@@ -80,8 +78,7 @@ describe.skip("Some words guessed", () => {
   });
 });
 
-// eslint-disable-next-line jest/no-disabled-tests
-describe.skip("Guess the secret word", () => {
+describe("Guess the secret word", () => {
   let wrapper;
 
   beforeEach(() => {

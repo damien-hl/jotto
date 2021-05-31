@@ -31,7 +31,14 @@ function GuessedWordsProvider(props) {
     [guessedWords]
   );
 
-  return <guessedWordsContext.Provider value={value} {...props} />;
+  const comp = (
+    <guessedWordsContext.Provider
+      value={value}
+      {...props}
+    ></guessedWordsContext.Provider>
+  );
+
+  return comp;
 }
 
 export default {

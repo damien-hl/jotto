@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
+import successContext from "./contexts/successContext";
 import languageContext from "./contexts/languageContext";
 import stringsModule from "./helpers/strings";
 
@@ -8,10 +9,10 @@ import stringsModule from "./helpers/strings";
  * Functionnal React component for input field
  *
  * @function Input
- * @param {{success: boolean}} props React props
  * @returns {JSX.Element} Rendered component
  */
-const Input = ({ success }) => {
+const Input = () => {
+  const [success] = successContext.useSuccess();
   const [currentGuess, setCurrentGuess] = React.useState("");
   const language = useContext(languageContext);
 

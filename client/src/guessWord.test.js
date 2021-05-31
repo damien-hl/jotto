@@ -1,18 +1,31 @@
 import React from "react";
 import { mount, ReactWrapper } from "enzyme";
 import { findByTestAttr } from "../test/testUtils";
-import App from "./App";
+import successContext from "./contexts/successContext";
+import guessedWordsContext from "./contexts/guessedWordsContext";
+// import App from "./App";
+import Congrats from "./Congrats";
+import Input from "./Input";
+import GuessedWords from "./GuessedWords";
 
 /**
  * Factory function to create a ShallowWrapper with specified initial conditions,
  * then submit a guessed word of 'train'
  *
  * @function setup
+ * @param {{secretWord: string, guessedWords: Array}} state Initial conditions
  * @returns {ReactWrapper}
  */
-const setup = () => {
-  // TODO: Apply state state = {}
-  const wrapper = mount(<App />);
+const setup = ({ secretWord, guessedWords }) => {
+  const wrapper = mount(
+    <guessedWordsContext.GuessedWordsProvider>
+      <successContext.SuccessProvider>
+        <Congrats />
+        <Input secretWord={secretWord} />
+        <GuessedWords />
+      </successContext.SuccessProvider>
+    </guessedWordsContext.GuessedWordsProvider>
+  );
 
   // Add value to input box
   const inputBox = findByTestAttr(wrapper, "input-box");
@@ -21,6 +34,12 @@ const setup = () => {
   // Simulate click on submit button
   const submitButton = findByTestAttr(wrapper, "submit-button");
   submitButton.simulate("click", { preventDefault() {} });
+
+  guessedWords.map((guess) => {
+    const mockEvent = { target: { value: guess.guessedWord } };
+    inputBox.simulate("change", mockEvent);
+    submitButton.simulate("click", { preventDefault() {} });
+  });
 
   return wrapper;
 };
